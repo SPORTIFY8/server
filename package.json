@@ -1,0 +1,29 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SPORTIFY8/server.git"
+  },
+  "author": "group project week 1",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SPORTIFY8/server/issues"
+  },
+  "homepage": "https://github.com/SPORTIFY8/server#readme",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "dotenv": "^6.1.0",
+    "express": "^4.16.4",
+    "google-auth-library": "^2.0.1",
+    "jsonwebtoken": "^8.3.0",
+    "mongodb": "^3.1.8",
+    "mongoose": "^5.3.8",
+    "request": "^2.88.0"
+  }
+}
