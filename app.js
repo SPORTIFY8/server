@@ -6,7 +6,7 @@ require('dotenv').config()
 
 // routes
 const routes = require('./routes')
-const twitterRoutes = require('./routes/twitter')
+const f1Routes = require('./routes/f1')
 const sportdbRoutes = require('./routes/sportdb')
 const ufcRoutes = require('./routes/ufc')
 const footballRoutes = require('./routes/football')
@@ -27,12 +27,11 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 //path
-app.use('/', routes)
-app.use('/twitter', twitterRoutes)
-app.use('/sportdb', sportdbRoutes)
-app.use('/ufc', ufcRoutes)
-app.use('/football', footballRoutes)
-app.use('/user', userRoutes)
+app.use('/',routes)
+app.use('/f1',f1Routes)
+app.use('/sportdb',sportdbRoutes)
+app.use('/ufc',ufcRoutes)
+app.use('/football',footballRoutes)
 
 //port
 const port = 3000
