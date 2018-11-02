@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 //path
+app.use('/user',userRoutes)
 app.use('/',routes)
 app.use('/f1',f1Routes)
 app.use('/sportdb',sportdbRoutes)
