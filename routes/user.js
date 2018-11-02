@@ -4,9 +4,8 @@ require('dotenv').config();
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.CLIENT_ID);
 const User = require('../models/user.js')
-
+const crypto = require("crypto");
 router.post('/signin', (req, res) => {
-    // res.send('hello');
     client.verifyIdToken({
         idToken: req.body.gtoken,
         audience: process.env.CLIENT_ID
@@ -41,6 +40,54 @@ router.post('/signin', (req, res) => {
 
         }
     });
+})
+router.post('/login', function(req, res) {
+    User.findOne({ email: req.body.email })
+        .then(function(data) {
+            if (data) {
+                let obj = {
+                    email: req.body.email
+                }
+                let pass = crypto.createHmac('sha256', data.salt).update(req.body.password).digest('hex')
+                if (data.password === pass) {
+                    let token = jwt.sign(obj, process.env.JWT_SECRET);
+                    res.status(200).json({
+                        token: token
+                    })
+                } else {
+                    res.status(400).json({
+                        message: `Incorrect password`
+                    })
+                }
+            } else {
+                res.status(400).json({
+                    message: `Email Already Taken`
+                })
+            }
+        })
+        .catch(function(err) {
+            res.status(400).json({
+                message: err.message
+            })
+        })
+})
+router.post('/register', function(req, res) {
+    let _salt = crypto.randomBytes(256).toString('hex')
+    let pass = crypto.createHmac('sha256', _salt).update(req.body.password).digest('hex')
+    User.create({
+            email: req.body.email,
+            password: pass,
+            salt: _salt,
+            oauth: false
+        })
+        .then(function() {
+            res.json('Signup Silahkan login')
+        })
+        .catch(function(err) {
+            res.status(400).json({
+                message: err.message
+            })
+        })
 })
 
 module.exports = router;
