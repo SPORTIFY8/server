@@ -27,20 +27,11 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 
 //path
-<<<<<<< HEAD
 app.use('/',routes)
 app.use('/f1',f1Routes)
 app.use('/sportdb',sportdbRoutes)
 app.use('/ufc',ufcRoutes)
 app.use('/football',footballRoutes)
-=======
-app.use('/', routes)
-app.use('/twitter', twitterRoutes)
-app.use('/sportdb', sportdbRoutes)
-app.use('/ufc', ufcRoutes)
-app.use('/football', footballRoutes)
-app.use('/user', userRoutes)
->>>>>>> 4ff39756abab19f6d68b4369048fb43826cd9bb2
 
 //port
 const port = 3000
